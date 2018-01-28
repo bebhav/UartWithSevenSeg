@@ -297,7 +297,7 @@ int main(void)
 	USART2->BRR = 0x341;
 	USART2->CR1 = ( USART_CR1_UE | USART_CR1_TE | USART_CR1_RE | USART_CR1_RXNEIE);
   HAL_NVIC_SetPriority(USART2_IRQn, 15, 0); // 15 is lowest priority 
-	HAL_NVIC_EnableIRQ(USART2_IRQn);
+	HAL_NVIC_EnableIRQ(USART2_IRQn); // For enabling Interupt 
 	
 	/* UART 2 Config End  */
   while (1)
