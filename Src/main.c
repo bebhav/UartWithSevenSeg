@@ -248,11 +248,13 @@ void Display(char a)
 
 	
 }
+char UartData=0;
 int main(void)
 {
   //volatile int click;
 	//int i;
-	char data;
+
+//	char data;
 //	char str[20];
 //	enum Led_Enum {
 //		Red = 0,
@@ -306,18 +308,14 @@ int main(void)
 //	i=0;		
 //	do
 //	{
-		int i =0 ;
+	//	int i =0 ;
 		while(1)
 		{
 			//data = UART2_RX();
 			//UART2_TX(data);
 			HAL_Delay(500);
-			Display(i+'0');
-			i++;
-			if(i>=10)
-			{
-				i =0;
-			}
+			UART2_TX('.');
+
 		}
 //		}
 //		if(Uart_Rx_NonBlocking(USART2,&data))
@@ -431,7 +429,11 @@ int main(void)
 
 void USART2_IRQHandler(void)
 {
-	UART2_TX(USART2->DR);
+	static int ByteRx=0;
+	ByteRx++ ;
+	UartData = USART2->DR;
+	UART2_TX(UartData);
+	Display(UartData);
 	return;
 }
 
